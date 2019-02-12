@@ -2,6 +2,17 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://35.201.196.124:1111/eureka/
+zuul:
+  routes:
+    department:
+      path: /department/**
+      serviceId: department-service
+    employee:
+      path: /employee/**
+      serviceId: employee-service
+    organization:
+      path: /organization/**
+      serviceId: organization-service
 
 logging:
   pattern:
