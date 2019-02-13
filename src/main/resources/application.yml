@@ -5,3 +5,12 @@ spring:
     name: gateway-service
   profiles:
     active: ${env}
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: "*"

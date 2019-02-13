@@ -25,6 +25,7 @@ repositories {
 
 ext {
     set('springCloudVersion', 'Greenwich.RELEASE')
+    set('springBootAdminVersion', '2.1.1')
 }
 
 dependencies {
@@ -32,6 +33,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
     implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'de.codecentric:spring-boot-admin-starter-client'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compile('io.springfox:springfox-swagger2:2.9.2')
     compile('io.springfox:springfox-swagger-ui:2.9.2')
@@ -40,5 +42,6 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
     }
 }
