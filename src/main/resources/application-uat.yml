@@ -24,6 +24,9 @@ zuul:
     organization:
       path: /organization/**
       serviceId: organization-service
+    user:
+      path: /user/**
+      serviceId: user-service
 
 logging:
   pattern:
