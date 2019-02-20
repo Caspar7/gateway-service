@@ -20,4 +20,4 @@ fi
 
 echo "load docker images ${serviceName}_${BUILD_NUMBER}.tar .."
 docker load -i ${serviceName}_${BUILD_NUMBER}.tar
-docker run --env env=${env} --env deployIp=${deployIp} -it -d -p ${deployPort}:${deployPort} --name ${serviceName} ${serviceName}:${BUILD_NUMBER}
+docker run --env env=${env} --env deployIp=${deployIp} -it -d -p 8888:8888 --name ${serviceName} ${serviceName}:${BUILD_NUMBER}
