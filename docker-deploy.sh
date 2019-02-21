@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 serviceName="gateway-service"
 BUILD_NUMBER=$1
-deployIp=$2
+serviceIp=$2
 env=$3
 
 echo "stop and delete exist docker images and container..."
@@ -22,4 +22,4 @@ fi
 
 echo "load docker images ${serviceName}_${BUILD_NUMBER}.tar .."
 docker load -i ${serviceName}_${BUILD_NUMBER}.tar
-docker run --env env=${env} --env deployIp=${deployIp} -it -d -p 8888:8888 --name ${serviceName} ${serviceName}:${BUILD_NUMBER}
+docker run --env env=${env} --env serviceIp=${serviceIp} -it -d -p 8888:8888 --name ${serviceName} ${serviceName}:${BUILD_NUMBER}
