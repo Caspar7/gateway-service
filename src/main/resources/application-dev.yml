@@ -16,6 +16,9 @@ eureka:
 
 zuul:
   routes:
+    auth:
+      path: /auth/**
+      serviceId: auth-service
     department:
       path: /department/**
       serviceId: department-service
