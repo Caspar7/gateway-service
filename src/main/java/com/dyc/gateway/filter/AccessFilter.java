@@ -46,7 +46,8 @@ public class AccessFilter extends ZuulFilter {
         String requesUrl = request.getRequestURL().toString();
         LOGGER.info("send {} request to {}", request.getMethod(), requesUrl);
         //登录接口放行
-        if (requesUrl.endsWith("auth/login")) {
+        if (requesUrl.endsWith("auth/login") || requesUrl.contains("swagger")
+                || requesUrl.endsWith("api-docs")|| requesUrl.endsWith("csrf")) {
             LOGGER.info("alow login api");
             return null;
         }
@@ -63,7 +64,8 @@ public class AccessFilter extends ZuulFilter {
             return null;
         }
 
-        String cacheToken = (String)redisTemplate.opsForValue().get("jwtToken");
+        String cacheToken = (String)redisTemplate.opsForValue().get(jwtToken);
+        LOGGER.info("cacheToken=["+cacheToken+"]");
         if(StringUtils.isBlank(cacheToken)){
             LOGGER.warn("access token is expired");
             ctx.setSendZuulResponse(false);
