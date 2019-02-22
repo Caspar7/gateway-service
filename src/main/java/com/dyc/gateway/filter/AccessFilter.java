@@ -2,8 +2,11 @@ package com.dyc.gateway.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 public class AccessFilter extends ZuulFilter {
 
     private static Logger LOGGER = LoggerFactory.getLogger(AccessFilter.class);
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public String filterType() {
@@ -56,6 +62,17 @@ public class AccessFilter extends ZuulFilter {
             ctx.getResponse().setContentType("text/html;charset=UTF-8");
             return null;
         }
+
+        String cacheToken = (String)redisTemplate.opsForValue().get("jwtToken");
+        if(StringUtils.isBlank(cacheToken)){
+            LOGGER.warn("access token is expired");
+            ctx.setSendZuulResponse(false);
+            ctx.setResponseStatusCode(401);
+            ctx.setResponseBody("{\"result\":\"accessToken已过期!\"}");
+            ctx.getResponse().setContentType("text/html;charset=UTF-8");
+            return null;
+        }
+
         //如果有token，则进行路由转发
         LOGGER.info("access token ok");
         //这里return的值没有意义，zuul框架没有使用该返回值

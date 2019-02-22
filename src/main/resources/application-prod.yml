@@ -15,6 +15,9 @@ eureka:
 
 zuul:
   routes:
+    auth:
+      path: /auth/**
+      serviceId: auth-service
     department:
       path: /department/**
       serviceId: department-service
@@ -24,6 +27,19 @@ zuul:
     organization:
       path: /organization/**
       serviceId: organization-service
+# redis (RedisProperties)
+spring:
+  redis:
+    host: localhost # Redis服务器地址
+    port: 6379 # Redis服务器连接端口
+    password: # Redis服务器连接密码（默认为空）
+    database: 0  # Redis数据库索引（默认为0）
+    lettuce:
+      pool:
+        max-active: 50 #连接池最大连接数（使用负值表示没有限制）
+        pool.max-wait: 3000 #连接池最大阻塞等待时间（使用负值表示没有限制）
+        pool.max-idle: 20 #连接池中的最大空闲连接
+        pool.min-idle: 2 #连接池中的最小空闲连接
 
 logging:
   pattern:
