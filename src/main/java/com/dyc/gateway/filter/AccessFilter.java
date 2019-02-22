@@ -53,7 +53,7 @@ public class AccessFilter extends ZuulFilter {
         }
 
         //获取传来的参数accessToken
-        Object jwtToken = request.getParameter("accessToken");
+        String jwtToken = request.getParameter("accessToken");
         if (jwtToken == null) {
             LOGGER.warn("access token is empty");
             //过滤该请求，不往下级服务去转发请求，到此结束
@@ -64,6 +64,7 @@ public class AccessFilter extends ZuulFilter {
             return null;
         }
 
+        LOGGER.info("jwtToken=["+jwtToken+"]");
         String cacheToken = (String)redisTemplate.opsForValue().get(jwtToken);
         LOGGER.info("cacheToken=["+cacheToken+"]");
         if(StringUtils.isBlank(cacheToken)){
