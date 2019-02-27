@@ -28,6 +28,9 @@ zuul:
     organization:
       path: /organization/**
       serviceId: organization-service
+    notification-service:
+      path: /notification/**
+      serviceId: notification-service
 
 # redis (RedisProperties)
 spring:
