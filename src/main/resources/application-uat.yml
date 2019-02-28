@@ -18,6 +18,9 @@ zuul:
     auth:
       path: /auth/**
       serviceId: auth-service
+    auth:
+      path: /schedule/**
+      serviceId: schedule-service
     department:
       path: /department/**
       serviceId: department-service
@@ -27,6 +30,9 @@ zuul:
     organization:
       path: /organization/**
       serviceId: organization-service
+    notification-service:
+      path: /notification/**
+      serviceId: notification-service
 
 # redis (RedisProperties)
 spring:
