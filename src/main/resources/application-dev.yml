@@ -1,5 +1,4 @@
 server:
-  address: localhost
   port: 8888
 eureka:
   instance:
@@ -12,7 +11,7 @@ eureka:
     healthcheck:
       enabled: true #开启健康检查（需要spring-boot-starter-actuator依赖）
     serviceUrl:
-      defaultZone: http://${server.address}:1111/eureka/
+      defaultZone: http://127.0.0.1:1111/eureka/
 
 zuul:
   routes:
