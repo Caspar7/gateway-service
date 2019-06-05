@@ -1,15 +1,18 @@
 server:
+  address: ${host_ip}
   port: 8888
 eureka:
   instance:
     lease-renewal-interval-in-seconds: 20 #租期更新时间间隔（默认30秒）
     lease-expiration-duration-in-seconds: 60 #租期到期时间（默认90秒）
+    instance-id: ${server.address}:${server.port}
+    ip-address: ${server.address}    # 使用docker部署时 指定此实例的ip
     prefer-ip-address: true    # 注册时使用ip而不是主机名
   client:
     healthcheck:
       enabled: true #开启健康检查（需要spring-boot-starter-actuator依赖）
     serviceUrl:
-      defaultZone: http://127.0.0.1:1111/eureka/
+      defaultZone: http://${server.address}:1111/eureka/
 
 zuul:
   routes:
