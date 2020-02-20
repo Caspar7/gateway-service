@@ -10,6 +10,15 @@ buildscript {
     }
 }
 
+allprojects {
+    repositories {
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url 'https://maven.aliyun.com/repository/spring/'}
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -18,10 +27,10 @@ group = 'com.dyc'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
-repositories {
-    mavenCentral()
-    maven { url 'https://repo.spring.io/milestone' }
-}
+//repositories {
+//    mavenCentral()
+//    maven { url 'https://repo.spring.io/milestone' }
+//}
 
 ext {
     set('springCloudVersion', 'Greenwich.RELEASE')
